@@ -1,0 +1,37 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:ui_intern/pages/OnBoarding/onboarding_page.dart';
+import 'package:ui_intern/themes/app_assets.dart';
+import 'package:ui_intern/themes/app_colors.dart';
+
+class SplashScreen2 extends StatefulWidget {
+  const SplashScreen2({super.key});
+
+  @override
+  State<SplashScreen2> createState() => _SplashScreen2State();
+}
+
+class _SplashScreen2State extends State<SplashScreen2> {
+
+  @override
+  void initState() {
+    super.initState();
+    _navigatetoboarding();
+  }
+
+  _navigatetoboarding() async {
+    await Future.delayed(Duration(milliseconds: 1000,));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OnBoardingPage()));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.blue,
+      body: Center(
+        child: Image.asset(AppAssets.ic_logo2),
+      ),
+    );
+  }
+}
