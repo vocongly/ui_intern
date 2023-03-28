@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 class AppAssets{
   static const String imagesPath = "assets/images/";
 
+  static const String imagesLinePath = "assets/images/line/";
+  static const String imagesFillPath = "assets/images/fill/";
+
+
   //icons
   static const String ic_logo1 = imagesPath + "ic_logo1.png";
   static const String ic_logo2 = imagesPath + "ic_logo2.png";
@@ -10,5 +14,19 @@ class AppAssets{
   static const String ic_boarding1 = imagesPath + "boarding1.png";
   static const String ic_boarding2 = imagesPath + "boarding2.png";
   static const String ic_boarding3 = imagesPath + "boarding3.png";
+
+  static const String ic_email = imagesLinePath + "mail_line.png";
+  static const String ic_password = imagesLinePath + "lock_line.png";
+
+  static const String ic_eye_line = imagesLinePath + "eye_line.png";
+  static const String ic_eye_close_line = imagesLinePath + "eye_close_line.png";
+
+  static const String ic_facebook_fill = imagesFillPath + "facebook_fill.png";
+  static const String ic_google_fill = imagesFillPath + "google_fill.png";
+  static const String ic_apple_fill = imagesFillPath + "apple_fill.png";
+
+  
+
+
 
 }

@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:ui_intern/pages/Login/login_page.dart';
 import 'package:ui_intern/themes/app_assets.dart';
 import 'package:ui_intern/themes/app_colors.dart';
 import 'package:ui_intern/themes/app_style.dart';
 
 import 'components/build_context.dart';
-import 'components/signup_and_exit.dart';
+import 'components/signin_and_exit.dart';
 
 class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({super.key});
@@ -78,8 +79,10 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                             children: List.generate(3, (index) => buildDot(index: index))),
                         const Spacer(),
                         currenPage == maxPage
-                        ? SignUpAndExit(
-                            signup: () {},
+                        ? SignInAndExit(
+                            signup: () {
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Loginpage()));
+                            },
                             exit: () {},
                           )
                         : Container(),

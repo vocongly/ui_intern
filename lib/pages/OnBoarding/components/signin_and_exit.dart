@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../../components/default_button.dart';
 import '../../../themes/app_colors.dart';
 import '../../../themes/app_style.dart';
 
-class SignUpAndExit extends StatelessWidget {
-  const SignUpAndExit({
+class SignInAndExit extends StatelessWidget {
+  const SignInAndExit({
     Key? key,
     required this.signup,
     required this.exit,
@@ -17,19 +18,7 @@ class SignUpAndExit extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TextButton(
-          onPressed: signup,
-          style: TextButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
-              primary: AppColors.white,
-              backgroundColor: AppColors.blue,
-              minimumSize: const Size.fromHeight(48)),
-          child: Text('ĐĂNG NHẬP',
-              style: AppStyles.button.copyWith(
-                color: AppColors.white,
-              )),
-        ),
+        DefaultButton(onPressed: signup,title: 'ĐĂNG NHẬP',),
         TextButton(
             onPressed: exit,
             child: Text('LẦN SAU',
@@ -40,3 +29,5 @@ class SignUpAndExit extends StatelessWidget {
     );
   }
 }
+
+
