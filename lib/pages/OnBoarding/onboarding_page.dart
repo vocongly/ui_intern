@@ -81,7 +81,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                         currenPage == maxPage
                         ? SignInAndExit(
                             signup: () {
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Loginpage()));
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
                             },
                             exit: () {},
                           )

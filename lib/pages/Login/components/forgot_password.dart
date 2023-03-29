@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../components/default_textbutton.dart';
-import '../../../themes/app_colors.dart';
-import '../../../themes/app_style.dart';
+
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({

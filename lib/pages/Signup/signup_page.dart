@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ui_intern/components/default_button.dart';
+import 'package:ui_intern/components/base_title_and_textform.dart';
+import 'package:ui_intern/components/primary_button.dart';
 import 'package:ui_intern/components/image_logo.dart';
 import 'package:ui_intern/pages/Login/login_page.dart';
 import 'package:ui_intern/themes/app_colors.dart';
@@ -7,8 +8,6 @@ import 'package:ui_intern/themes/app_colors.dart';
 import '../../components/default_textbutton.dart';
 import '../../themes/app_assets.dart';
 import '../../themes/app_style.dart';
-import '../Login/components/email_form.dart';
-import '../Login/components/password_form.dart';
 import '../Login/components/social_networking.dart';
 
 class SignupPage extends StatefulWidget {
@@ -19,12 +18,11 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-
   bool _passwordVisible = false;
   bool _passwordconfirmVisible = false;
 
-
-  bool _isCorretEmail = true;
+  final bool _isCorretEmail = true;
+  final bool _isCorretPassword = true;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -52,27 +50,49 @@ class _SignupPageState extends State<SignupPage> {
                   const SizedBox(
                     height: 32,
                   ),
-                  EmailForm(emailController: emailController, isCorretEmail: _isCorretEmail,),
-                  PasswordForm(
-                    passwordController: passwordController,
+                  BaseTitleAndTextForm(
+                    controller: emailController,
+                    isCorretValid: _isCorretEmail,
+                    errorText: 'Error text',
+                    hintText: 'Nhập email của bạn',
+                    title: 'Email',
+                  ),
+                  BaseTitleAndTextForm(
+                    controller: passwordController,
                     passwordVisible: _passwordVisible,
+                    isCorretValid: _isCorretPassword,
+                    errorText: 'Mật khẩu phải ít nhất 8 kí tự',
                     onPressed: () {
                       setState(() {
                         _passwordVisible = !_passwordVisible;
                       });
-                    }, hintText: 'Nhập mật khẩu',title: "Mật khẩu",
+                    },
+                    hintText: 'Nhập mật khẩu',
+                    title: "Mật khẩu",
                   ),
-                  PasswordForm(
-                    passwordController: confirmpasswordController,
+                  BaseTitleAndTextForm(
+                    controller: confirmpasswordController,
+                    isCorretValid: _isCorretPassword,
+                    errorText: 'Mật khẩu phải ít nhất 8 kí tự',
                     passwordVisible: _passwordconfirmVisible,
                     onPressed: () {
                       setState(() {
                         _passwordconfirmVisible = !_passwordconfirmVisible;
                       });
-                    }, hintText: 'Nhập lại mật khẩu', title: 'Xác thực mật khẩu',
+                    },
+                    hintText: 'Nhập lại mật khẩu',
+                    title: 'Xác thực mật khẩu',
                   ),
-                  DefaultButton(onPressed: (){}, title: 'ĐĂNG KÝ'),
-                  SocialNetworking(),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  PrimaryButton(
+                    onPressed: () {},
+                    title: 'ĐĂNG KÝ',
+                    backgroundColor: AppColors.blue,
+                    textColor: AppColors.white,
+                  ),
+                  const SocialNetworking(),
                 ],
               ),
               Center(
@@ -82,11 +102,15 @@ class _SignupPageState extends State<SignupPage> {
                       'Bạn đã có tài khoản?',
                       style: AppStyles.body1,
                     ),
-                    TextButtonDefault(
+                    BaseTextButton(
                       onPressed: () {
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Loginpage() ));
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()));
                       },
                       title: 'ĐĂNG NHẬP NGAY',
+                      textColor: AppColors.blue,
                     )
                   ],
                 ),

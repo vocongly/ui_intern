@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: constant_identifier_names, prefer_interpolation_to_compose_strings
+
 
 class AppAssets{
   static const String imagesPath = "assets/images/";
@@ -17,6 +18,10 @@ class AppAssets{
 
   static const String ic_email = imagesLinePath + "mail_line.png";
   static const String ic_password = imagesLinePath + "lock_line.png";
+  static const String ic_home = imagesLinePath + "home_line.png";
+  static const String ic_arow_right = imagesLinePath + "arrow_right_line.png";
+  static const String ic_arow_left = imagesLinePath + "arrow_left_line.png";
+
 
   static const String ic_eye_line = imagesLinePath + "eye_line.png";
   static const String ic_eye_close_line = imagesLinePath + "eye_close_line.png";

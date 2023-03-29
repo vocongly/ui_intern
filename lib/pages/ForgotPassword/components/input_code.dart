@@ -33,8 +33,8 @@ class InputCode extends StatelessWidget {
               borderSide: const BorderSide(color: AppColors.blue, width: 1.0),
               borderRadius: BorderRadius.circular(16)
             ),
-            labelStyle: TextStyle(fontSize: 16),
-            contentPadding: EdgeInsets.all(0),
+            labelStyle: const TextStyle(fontSize: 16),
+            contentPadding: const EdgeInsets.all(0),
             border: InputBorder.none),
           textAlign: TextAlign.center,
           inputFormatters: [

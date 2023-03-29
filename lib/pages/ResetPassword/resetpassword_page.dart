@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:ui_intern/components/default_button.dart';
+import 'package:ui_intern/components/base_title_and_textform.dart';
+import 'package:ui_intern/components/primary_button.dart';
 import 'package:ui_intern/components/default_textbutton.dart';
 import 'package:ui_intern/components/image_logo.dart';
 import 'package:ui_intern/pages/Login/components/social_networking.dart';
 import 'package:ui_intern/themes/app_colors.dart';
 
+import '../../themes/app_assets.dart';
 import '../../themes/app_style.dart';
-import '../Login/components/password_form.dart';
 import '../Login/login_page.dart';
 
 class ResetPasswordPage extends StatefulWidget {
@@ -17,6 +18,7 @@ class ResetPasswordPage extends StatefulWidget {
 }
 
 class _ResetPasswordPageState extends State<ResetPasswordPage> {
+  bool _isCorretPassword = true;
 
   bool _passwordVisible = false;
   bool _passwordconfirmVisible = false;
@@ -30,12 +32,12 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
       backgroundColor: AppColors.white,
       body: SafeArea(
           child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ImageLogo(),
+            const ImageLogo(),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -47,10 +49,14 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   'Vui lòng nhập mật khẩu mới của bạn',
                   style: AppStyles.body1,
                 ),
-                SizedBox(height: 32,),
-                PasswordForm(
-                  passwordController: passwordController,
+                const SizedBox(
+                  height: 32,
+                ),
+                BaseTitleAndTextForm(
+                  controller: passwordController,
                   passwordVisible: _passwordVisible,
+                  isCorretValid: _isCorretPassword,
+                  errorText: 'Mật khẩu phải ít nhất 8 kí tự',
                   onPressed: () {
                     setState(() {
                       _passwordVisible = !_passwordVisible;
@@ -59,9 +65,11 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   hintText: 'Nhập mật khẩu mới',
                   title: "Mật khẩu mới",
                 ),
-                PasswordForm(
-                  passwordController: confirmpasswordController,
+                BaseTitleAndTextForm(
+                  controller: confirmpasswordController,
                   passwordVisible: _passwordconfirmVisible,
+                  isCorretValid: _isCorretPassword,
+                  errorText: 'Mật khẩu phải ít nhất 8 kí tự',
                   onPressed: () {
                     setState(() {
                       _passwordconfirmVisible = !_passwordconfirmVisible;
@@ -70,13 +78,26 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   hintText: 'Nhập lại mật khẩu mới',
                   title: 'Xác thực mật khẩu',
                 ),
-                DefaultButton(onPressed: (){}, title: "ĐỔI MẬT KHẨU"),
-                SocialNetworking()
+                const SizedBox(height: 32,),
+                PrimaryButton(
+                  onPressed: () {},
+                  title: "ĐỔI MẬT KHẨU",
+                  backgroundColor: AppColors.blue,
+                  textColor: AppColors.white,
+                ),
+                const SocialNetworking()
               ],
             ),
-            Center(child: TextButtonDefault(onPressed: (){
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Loginpage()));
-            }, title: "< TRỞ VỀ ĐĂNG NHẬP"))
+            Center(
+                child: BaseTextButton(
+              onPressed: () {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()));
+              },
+              title: "TRỞ VỀ ĐĂNG NHẬP",
+              textColor: AppColors.blue,
+              preIconUrl: AppAssets.ic_arow_left,
+            ))
           ],
         ),
       )),

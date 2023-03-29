@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../themes/app_colors.dart';
 import '../themes/app_style.dart';
 
-class TitleStar extends StatelessWidget {
-  const TitleStar({
+class BaseTitle extends StatelessWidget {
+  const BaseTitle({
     Key? key, required this.title,
   }) : super(key: key);
 
@@ -18,10 +18,10 @@ class TitleStar extends StatelessWidget {
           title,
           style: AppStyles.label.copyWith(fontWeight: FontWeight.bold),
         ),
-        SizedBox(
+        const SizedBox(
           width: 8,
         ),
-        Text('*',style: TextStyle(color: AppColors.red),)
+        const Text('*',style: TextStyle(color: AppColors.red),)
       ],
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ui_intern/components/default_button.dart';
+import 'package:ui_intern/components/base_title_and_textform.dart';
+import 'package:ui_intern/components/primary_button.dart';
 import 'package:ui_intern/components/default_textbutton.dart';
 import 'package:ui_intern/pages/ForgotPassword/forgotpassword_page.dart';
 import 'package:ui_intern/pages/Signup/signup_page.dart';
@@ -9,23 +10,21 @@ import 'package:ui_intern/themes/app_style.dart';
 
 import '../../components/image_button.dart';
 import '../../components/image_logo.dart';
-import 'components/email_form.dart';
 import 'components/forgot_password.dart';
-import 'components/password_form.dart';
 import 'components/social_networking.dart';
 
-class Loginpage extends StatefulWidget {
-  const Loginpage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<Loginpage> createState() => _LoginpageState();
+  State<LoginPage> createState() => _LoginpageState();
 }
 
-class _LoginpageState extends State<Loginpage> {
-
+class _LoginpageState extends State<LoginPage> {
   bool _passwordVisible = false;
 
   bool _isCorretEmail = true;
+  bool _isCorretPassword = true;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -37,11 +36,19 @@ class _LoginpageState extends State<Loginpage> {
   }
 
   bool isEmail(String em) {
-    String p = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    String p =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
     RegExp regExp = new RegExp(p);
 
     return regExp.hasMatch(em);
+  }
+
+  bool isPassword(String em) {
+    if (em.length < 8) {
+      return false;
+    }
+    return true;
   }
 
   @override
@@ -66,41 +73,68 @@ class _LoginpageState extends State<Loginpage> {
                   const SizedBox(
                     height: 32,
                   ),
-                  EmailForm(iconUrl: AppAssets.ic_email, emailController: emailController, isCorretEmail: _isCorretEmail,),
-                  if(!_isCorretEmail)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 16),
-                      child: Text('Email không hợp lệ',style: AppStyles.body2.copyWith(color: AppColors.red,),),
-                    ),
-                  PasswordForm(
-                    iconUrl: AppAssets.ic_password,
-                    passwordController: passwordController,
+                  BaseTitleAndTextForm(
+                      controller: emailController,
+                      isCorretValid: _isCorretEmail,
+                      errorText: 'Error text',
+                      title: 'Email',
+                      hintText: 'Nhập email của bạn'),
+                  BaseTitleAndTextForm(
+                    controller: passwordController,
+                    title: 'Mật khẩu',
+                    isCorretValid: _isCorretPassword,
+                    errorText: 'Mật khẩu phải ít nhất 8 kí tự',
+                    hintText: 'Mật khẩu chứa 8 kí tự',
                     passwordVisible: _passwordVisible,
                     onPressed: () {
                       setState(() {
                         _passwordVisible = !_passwordVisible;
                       });
-                    }, title: 'Mật khẩu', hintText: '********',
+                    },
                   ),
                   ForgotPassword(
                     onPressed: () {
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ForgotPasswordPage() ));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const ForgotPasswordPage()));
                     },
                   ),
-                  DefaultButton(
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  PrimaryButton(
                     onPressed: () {
-                      if (!isEmail(emailController.text)) 
-                      {
-                        setState(() {
-                          _isCorretEmail = !_isCorretEmail;
-                        },);
-                      }else{
+                      if (!isEmail(emailController.text)) {
+                        setState(
+                          () {
+                            _isCorretEmail = false;
+                          },
+                        );
+                      } else {
                         setState(() {
                           _isCorretEmail = true;
                         });
                       }
-                  }, title: 'ĐĂNG NHẬP',),
-                  SocialNetworking(),
+
+                      if (!isPassword(passwordController.text)) {
+                        setState(
+                          () {
+                            _isCorretPassword = false;
+                          },
+                        );
+                      } else {
+                        setState(() {
+                          _isCorretPassword = true;
+                        });
+                      }
+                    },
+                    title: 'ĐĂNG NHẬP',
+                    backgroundColor: AppColors.blue,
+                    textColor: AppColors.white,
+                  ),
+                  const SocialNetworking(),
                 ],
               ),
               Center(
@@ -110,11 +144,15 @@ class _LoginpageState extends State<Loginpage> {
                       'Bạn chưa có tài khoản?',
                       style: AppStyles.body1,
                     ),
-                    TextButtonDefault(
+                    BaseTextButton(
                       onPressed: () {
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignupPage() ));
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SignupPage()));
                       },
                       title: 'ĐĂNG KÝ NGAY',
+                      textColor: AppColors.blue,
                     )
                   ],
                 ),
@@ -126,5 +164,3 @@ class _LoginpageState extends State<Loginpage> {
     );
   }
 }
-
-
