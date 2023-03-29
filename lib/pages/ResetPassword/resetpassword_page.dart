@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ui_intern/components/base_title_and_textform.dart';
 import 'package:ui_intern/components/primary_button.dart';
-import 'package:ui_intern/components/default_textbutton.dart';
 import 'package:ui_intern/components/image_logo.dart';
 import 'package:ui_intern/pages/Login/components/social_networking.dart';
 import 'package:ui_intern/themes/app_colors.dart';
@@ -18,7 +17,7 @@ class ResetPasswordPage extends StatefulWidget {
 }
 
 class _ResetPasswordPageState extends State<ResetPasswordPage> {
-  bool _isCorretPassword = true;
+  final bool _isCorretPassword = true;
 
   bool _passwordVisible = false;
   bool _passwordconfirmVisible = false;

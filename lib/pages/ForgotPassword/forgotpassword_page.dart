@@ -1,8 +1,8 @@
+// ignore_for_file: unnecessary_new
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:ui_intern/components/primary_button.dart';
-import 'package:ui_intern/components/default_textbutton.dart';
 import 'package:ui_intern/components/image_logo.dart';
 import 'package:ui_intern/pages/Login/components/social_networking.dart';
 import 'package:ui_intern/pages/Login/login_page.dart';
@@ -12,7 +12,6 @@ import 'package:ui_intern/themes/app_colors.dart';
 import '../../themes/app_style.dart';
 import '../ResetPassword/resetpassword_page.dart';
 import 'components/digit_code.dart';
-import 'components/input_code.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -38,7 +37,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ImageLogo(),
+                const ImageLogo(),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

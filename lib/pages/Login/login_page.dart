@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ui_intern/components/base_title_and_textform.dart';
 import 'package:ui_intern/components/primary_button.dart';
-import 'package:ui_intern/components/default_textbutton.dart';
 import 'package:ui_intern/pages/ForgotPassword/forgotpassword_page.dart';
 import 'package:ui_intern/pages/Signup/signup_page.dart';
-import 'package:ui_intern/themes/app_assets.dart';
 import 'package:ui_intern/themes/app_colors.dart';
 import 'package:ui_intern/themes/app_style.dart';
 
-import '../../components/image_button.dart';
 import '../../components/image_logo.dart';
 import 'components/forgot_password.dart';
 import 'components/social_networking.dart';
@@ -39,7 +36,7 @@ class _LoginpageState extends State<LoginPage> {
     String p =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
 
-    RegExp regExp = new RegExp(p);
+    RegExp regExp = RegExp(p);
 
     return regExp.hasMatch(em);
   }
@@ -62,7 +59,7 @@ class _LoginpageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ImageLogo(),
+              const ImageLogo(),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -149,7 +146,7 @@ class _LoginpageState extends State<LoginPage> {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => SignupPage()));
+                                builder: (context) => const SignupPage()));
                       },
                       title: 'ĐĂNG KÝ NGAY',
                       textColor: AppColors.blue,

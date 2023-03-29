@@ -1,8 +1,5 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:ui_intern/themes/app_colors.dart';
-import 'package:ui_intern/themes/app_style.dart';
 
 import 'base_errortext.dart';
 import 'base_textform.dart';

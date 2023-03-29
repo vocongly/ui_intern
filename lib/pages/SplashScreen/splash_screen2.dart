@@ -1,6 +1,6 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:ui_intern/pages/OnBoarding/onboarding_page.dart';
 import 'package:ui_intern/themes/app_assets.dart';
 import 'package:ui_intern/themes/app_colors.dart';
@@ -21,8 +21,8 @@ class _SplashScreen2State extends State<SplashScreen2> {
   }
 
   _navigatetoboarding() async {
-    await Future.delayed(Duration(milliseconds: 1000,));
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OnBoardingPage()));
+    await Future.delayed(const Duration(milliseconds: 1000,));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const OnBoardingPage()));
   }
 
   @override

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:ui_intern/pages/SplashScreen/splash_screen2.dart';
 import 'package:ui_intern/themes/app_assets.dart';
@@ -18,8 +20,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _navigatetosplash2() async {
-    await Future.delayed(Duration(milliseconds: 1000,));
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SplashScreen2()));
+    await Future.delayed(const Duration(milliseconds: 1000,));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const SplashScreen2()));
   }
 
   @override

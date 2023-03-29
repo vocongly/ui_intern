@@ -28,14 +28,14 @@ class SocialNetworking extends StatelessWidget {
               onClicked: () {},
               imagePath: AppAssets.ic_facebook_fill,
             ),
-            SizedBox(
+            const SizedBox(
               width: 30,
             ),
             ImageButton(
               onClicked: () {},
               imagePath: AppAssets.ic_google_fill,
             ),
-            SizedBox(
+            const SizedBox(
               width: 30,
             ),
             ImageButton(

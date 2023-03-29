@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../themes/app_style.dart';
 
-class buildContext extends StatelessWidget {
-  const buildContext({
+class IntroduceContext extends StatelessWidget {
+  const IntroduceContext({
     Key? key,
     required this.urlImage,
     required this.heading,
@@ -19,7 +19,7 @@ class buildContext extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(urlImage),
-        SizedBox(
+        const SizedBox(
           height: 48,
         ),
         Text(
@@ -27,7 +27,7 @@ class buildContext extends StatelessWidget {
           style: AppStyles.heading3,
           textAlign: TextAlign.center,
         ),
-        SizedBox(
+        const SizedBox(
           height: 8,
         ),
         Text(

@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:ui_intern/pages/Login/login_page.dart';
 import 'package:ui_intern/themes/app_assets.dart';
 import 'package:ui_intern/themes/app_colors.dart';
-import 'package:ui_intern/themes/app_style.dart';
 
-import 'components/build_context.dart';
+import 'components/introduce_context.dart';
 import 'components/signin_and_exit.dart';
 
 class OnBoardingPage extends StatefulWidget {
@@ -52,17 +48,17 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                       });
                     },
                     children: const [
-                      buildContext(
+                      IntroduceContext(
                         urlImage: AppAssets.ic_boarding1,
                         heading: "Chào mừng đến với My Smart Home",
                         body: "Ứng dụng quản lý nhà thông minh",
                       ),
-                      buildContext(
+                      IntroduceContext(
                         urlImage: AppAssets.ic_boarding2,
                         heading: "Điều khiển dễ dàng",
                         body: "Điều khiển các thiết bị thông qua Internet",
                       ),
-                      buildContext(
+                      IntroduceContext(
                         urlImage: AppAssets.ic_boarding3,
                         heading: "Kiểm soát nhà ở",
                         body: "Biết tình trạng các thiết bị mọi lúc mọi nơi",
@@ -81,7 +77,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                         currenPage == maxPage
                         ? SignInAndExit(
                             signup: () {
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
                             },
                             exit: () {},
                           )

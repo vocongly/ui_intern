@@ -5,8 +5,6 @@ import 'package:ui_intern/components/image_logo.dart';
 import 'package:ui_intern/pages/Login/login_page.dart';
 import 'package:ui_intern/themes/app_colors.dart';
 
-import '../../components/default_textbutton.dart';
-import '../../themes/app_assets.dart';
 import '../../themes/app_style.dart';
 import '../Login/components/social_networking.dart';
 
@@ -39,7 +37,7 @@ class _SignupPageState extends State<SignupPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ImageLogo(),
+              const ImageLogo(),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -107,7 +105,7 @@ class _SignupPageState extends State<SignupPage> {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LoginPage()));
+                                builder: (context) => const LoginPage()));
                       },
                       title: 'ĐĂNG NHẬP NGAY',
                       textColor: AppColors.blue,
