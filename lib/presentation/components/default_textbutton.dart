@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../themes/app_colors.dart';
-import '../themes/app_style.dart';
+import '../../ulti/style/app_colors.dart';
+import '../../ulti/style/app_style.dart';
+
 
 class TextButtonDefault extends StatelessWidget {
   const TextButtonDefault({

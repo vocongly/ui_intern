@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../components/primary_button.dart';
-import '../../../themes/app_colors.dart';
-import '../../../themes/app_style.dart';
+import '../../../../ulti/style/app_colors.dart';
+import '../../../../ulti/style/app_style.dart';
+import '../../../components/button_widget.dart';
+
 
 class SignInAndExit extends StatelessWidget {
   const SignInAndExit({
@@ -18,7 +19,7 @@ class SignInAndExit extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        PrimaryButton(onPressed: signup,title: 'ĐĂNG NHẬP',),
+        ButtonWidget.primary(onPressed: signup,title: 'ĐĂNG NHẬP',),
         TextButton(
             onPressed: exit,
             child: Text('LẦN SAU',

@@ -2,14 +2,13 @@
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:ui_intern/components/primary_button.dart';
-import 'package:ui_intern/components/image_logo.dart';
-import 'package:ui_intern/pages/Login/components/social_networking.dart';
-import 'package:ui_intern/pages/Login/login_page.dart';
-import 'package:ui_intern/themes/app_assets.dart';
-import 'package:ui_intern/themes/app_colors.dart';
-
-import '../../themes/app_style.dart';
+import 'package:ui_intern/presentation/components/button_widget.dart';
+import 'package:ui_intern/presentation/components/image_logo.dart';
+import 'package:ui_intern/presentation/pages/Login/components/social_networking.dart';
+import 'package:ui_intern/presentation/pages/Login/login_page.dart';
+import '../../../ulti/style/app_assets.dart';
+import '../../../ulti/style/app_colors.dart';
+import '../../../ulti/style/app_style.dart';
 import '../ResetPassword/resetpassword_page.dart';
 import 'components/digit_code.dart';
 
@@ -68,19 +67,17 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       ])),
                     ),
                     const SizedBox(height: 32,),
-                    PrimaryButton(onPressed: () {
+                    ButtonWidget.primary(onPressed: () {
                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ResetPasswordPage() ));
-                    }, title: "XÁC NHẬN",backgroundColor: AppColors.blue,textColor: AppColors.white,),
+                    }, title: "XÁC NHẬN",),
                     const SocialNetworking(),
                   ],
                 ),
-                Center(
-                    child: BaseTextButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
-                        }, title: "TRỞ VỀ ĐĂNG NHẬP",
-                        textColor: AppColors.blue,
-                        preIconUrl: AppAssets.ic_arow_left,))
+                ButtonWidget.text(
+                    onPressed: () {
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
+                    }, title: "TRỞ VỀ ĐĂNG NHẬP",
+                    preIconUrl: AppAssets.ic_arow_left,)
               ]),
         ),
       ),

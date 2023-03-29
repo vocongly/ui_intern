@@ -1,9 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:ui_intern/pages/SplashScreen/splash_screen2.dart';
-import 'package:ui_intern/themes/app_assets.dart';
-import 'package:ui_intern/themes/app_colors.dart';
+import 'package:ui_intern/presentation/pages/SplashScreen/splash_screen2.dart';
+
+import '../../../ulti/style/app_assets.dart';
+import '../../../ulti/style/app_colors.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

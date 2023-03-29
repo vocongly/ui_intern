@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:ui_intern/components/base_title_and_textform.dart';
-import 'package:ui_intern/components/primary_button.dart';
-import 'package:ui_intern/pages/ForgotPassword/forgotpassword_page.dart';
-import 'package:ui_intern/pages/Signup/signup_page.dart';
-import 'package:ui_intern/themes/app_colors.dart';
-import 'package:ui_intern/themes/app_style.dart';
+import 'package:ui_intern/presentation/components/button_widget.dart';
+import 'package:ui_intern/presentation/pages/ForgotPassword/forgotpassword_page.dart';
+import 'package:ui_intern/presentation/pages/Signup/signup_page.dart';
 
+import '../../../ulti/style/app_colors.dart';
+import '../../../ulti/style/app_style.dart';
+import '../../components/base_textform.dart';
 import '../../components/image_logo.dart';
 import 'components/forgot_password.dart';
 import 'components/social_networking.dart';
@@ -70,13 +70,14 @@ class _LoginpageState extends State<LoginPage> {
                   const SizedBox(
                     height: 32,
                   ),
-                  BaseTitleAndTextForm(
-                      controller: emailController,
-                      isCorretValid: _isCorretEmail,
-                      errorText: 'Error text',
-                      title: 'Email',
-                      hintText: 'Nhập email của bạn'),
-                  BaseTitleAndTextForm(
+                  BaseTextForm(
+                    controller: emailController,
+                    isCorretValid: _isCorretEmail,
+                    errorText: 'Error text',
+                    title: 'Email',
+                    hintText: 'Nhập email của bạn', 
+                  ),
+                  BaseTextForm(
                     controller: passwordController,
                     title: 'Mật khẩu',
                     isCorretValid: _isCorretPassword,
@@ -101,7 +102,7 @@ class _LoginpageState extends State<LoginPage> {
                   const SizedBox(
                     height: 32,
                   ),
-                  PrimaryButton(
+                  ButtonWidget.primary(
                     onPressed: () {
                       if (!isEmail(emailController.text)) {
                         setState(
@@ -128,8 +129,6 @@ class _LoginpageState extends State<LoginPage> {
                       }
                     },
                     title: 'ĐĂNG NHẬP',
-                    backgroundColor: AppColors.blue,
-                    textColor: AppColors.white,
                   ),
                   const SocialNetworking(),
                 ],
@@ -141,7 +140,7 @@ class _LoginpageState extends State<LoginPage> {
                       'Bạn chưa có tài khoản?',
                       style: AppStyles.body1,
                     ),
-                    BaseTextButton(
+                    ButtonWidget.text(
                       onPressed: () {
                         Navigator.pushReplacement(
                             context,
@@ -149,7 +148,6 @@ class _LoginpageState extends State<LoginPage> {
                                 builder: (context) => const SignupPage()));
                       },
                       title: 'ĐĂNG KÝ NGAY',
-                      textColor: AppColors.blue,
                     )
                   ],
                 ),

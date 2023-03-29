@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../../themes/app_colors.dart';
+import '../../../../ulti/style/app_colors.dart';
 
 class InputCode extends StatelessWidget {
   const InputCode({

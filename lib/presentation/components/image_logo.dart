@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../themes/app_assets.dart';
-import '../themes/app_colors.dart';
+import '../../ulti/style/app_assets.dart';
+import '../../ulti/style/app_colors.dart';
 
 class ImageLogo extends StatelessWidget {
   const ImageLogo({

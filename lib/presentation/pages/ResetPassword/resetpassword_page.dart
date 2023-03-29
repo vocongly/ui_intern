@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:ui_intern/components/base_title_and_textform.dart';
-import 'package:ui_intern/components/primary_button.dart';
-import 'package:ui_intern/components/image_logo.dart';
-import 'package:ui_intern/pages/Login/components/social_networking.dart';
-import 'package:ui_intern/themes/app_colors.dart';
+import 'package:ui_intern/presentation/components/button_widget.dart';
+import 'package:ui_intern/presentation/components/image_logo.dart';
+import 'package:ui_intern/presentation/pages/Login/components/social_networking.dart';
 
-import '../../themes/app_assets.dart';
-import '../../themes/app_style.dart';
+import '../../../ulti/style/app_assets.dart';
+import '../../../ulti/style/app_colors.dart';
+import '../../../ulti/style/app_style.dart';
+import '../../components/base_textform.dart';
 import '../Login/login_page.dart';
 
 class ResetPasswordPage extends StatefulWidget {
@@ -51,7 +51,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 const SizedBox(
                   height: 32,
                 ),
-                BaseTitleAndTextForm(
+                BaseTextForm(
                   controller: passwordController,
                   passwordVisible: _passwordVisible,
                   isCorretValid: _isCorretPassword,
@@ -64,7 +64,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   hintText: 'Nhập mật khẩu mới',
                   title: "Mật khẩu mới",
                 ),
-                BaseTitleAndTextForm(
+                BaseTextForm(
                   controller: confirmpasswordController,
                   passwordVisible: _passwordconfirmVisible,
                   isCorretValid: _isCorretPassword,
@@ -78,25 +78,21 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   title: 'Xác thực mật khẩu',
                 ),
                 const SizedBox(height: 32,),
-                PrimaryButton(
+                ButtonWidget.primary(
                   onPressed: () {},
                   title: "ĐỔI MẬT KHẨU",
-                  backgroundColor: AppColors.blue,
-                  textColor: AppColors.white,
                 ),
                 const SocialNetworking()
               ],
             ),
-            Center(
-                child: BaseTextButton(
+            ButtonWidget.text(
               onPressed: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()));
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => const LoginPage()));
               },
               title: "TRỞ VỀ ĐĂNG NHẬP",
-              textColor: AppColors.blue,
               preIconUrl: AppAssets.ic_arow_left,
-            ))
+            )
           ],
         ),
       )),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:ui_intern/components/base_title_and_textform.dart';
-import 'package:ui_intern/components/primary_button.dart';
-import 'package:ui_intern/components/image_logo.dart';
-import 'package:ui_intern/pages/Login/login_page.dart';
-import 'package:ui_intern/themes/app_colors.dart';
+import 'package:ui_intern/presentation/components/button_widget.dart';
+import 'package:ui_intern/presentation/components/image_logo.dart';
+import 'package:ui_intern/presentation/pages/Login/login_page.dart';
 
-import '../../themes/app_style.dart';
+import '../../../ulti/style/app_colors.dart';
+import '../../../ulti/style/app_style.dart';
+import '../../components/base_textform.dart';
 import '../Login/components/social_networking.dart';
 
 class SignupPage extends StatefulWidget {
@@ -48,14 +48,14 @@ class _SignupPageState extends State<SignupPage> {
                   const SizedBox(
                     height: 32,
                   ),
-                  BaseTitleAndTextForm(
+                  BaseTextForm(
                     controller: emailController,
                     isCorretValid: _isCorretEmail,
                     errorText: 'Error text',
                     hintText: 'Nhập email của bạn',
                     title: 'Email',
                   ),
-                  BaseTitleAndTextForm(
+                  BaseTextForm(
                     controller: passwordController,
                     passwordVisible: _passwordVisible,
                     isCorretValid: _isCorretPassword,
@@ -68,7 +68,7 @@ class _SignupPageState extends State<SignupPage> {
                     hintText: 'Nhập mật khẩu',
                     title: "Mật khẩu",
                   ),
-                  BaseTitleAndTextForm(
+                  BaseTextForm(
                     controller: confirmpasswordController,
                     isCorretValid: _isCorretPassword,
                     errorText: 'Mật khẩu phải ít nhất 8 kí tự',
@@ -84,11 +84,10 @@ class _SignupPageState extends State<SignupPage> {
                   const SizedBox(
                     height: 32,
                   ),
-                  PrimaryButton(
+                  ButtonWidget.primary(
                     onPressed: () {},
                     title: 'ĐĂNG KÝ',
-                    backgroundColor: AppColors.blue,
-                    textColor: AppColors.white,
+                    
                   ),
                   const SocialNetworking(),
                 ],
@@ -100,7 +99,7 @@ class _SignupPageState extends State<SignupPage> {
                       'Bạn đã có tài khoản?',
                       style: AppStyles.body1,
                     ),
-                    BaseTextButton(
+                    ButtonWidget.text(
                       onPressed: () {
                         Navigator.pushReplacement(
                             context,
@@ -108,7 +107,6 @@ class _SignupPageState extends State<SignupPage> {
                                 builder: (context) => const LoginPage()));
                       },
                       title: 'ĐĂNG NHẬP NGAY',
-                      textColor: AppColors.blue,
                     )
                   ],
                 ),
