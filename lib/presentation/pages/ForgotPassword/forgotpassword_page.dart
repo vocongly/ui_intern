@@ -2,13 +2,13 @@
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:ui_intern/presentation/components/button_widget.dart';
-import 'package:ui_intern/presentation/components/image_logo.dart';
-import 'package:ui_intern/presentation/pages/Login/components/social_networking.dart';
 import 'package:ui_intern/presentation/pages/Login/login_page.dart';
 import '../../../ulti/style/app_assets.dart';
 import '../../../ulti/style/app_colors.dart';
 import '../../../ulti/style/app_style.dart';
+import '../../components/button/button_widget.dart';
+import '../../components/image/image_logo.dart';
+import '../Login/components/social_networking.dart';
 import '../ResetPassword/resetpassword_page.dart';
 import 'components/digit_code.dart';
 
@@ -66,22 +66,35 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                             recognizer: TapGestureRecognizer()..onTap = () {})
                       ])),
                     ),
-                    const SizedBox(height: 32,),
-                    ButtonWidget.primary(onPressed: () {
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ResetPasswordPage() ));
-                    }, title: "XÁC NHẬN",),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    ButtonWidget.primary(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const ResetPasswordPage()));
+                      },
+                      content: 'XÁC NHẬN',
+                    ),
                     const SocialNetworking(),
                   ],
                 ),
                 ButtonWidget.text(
-                    onPressed: () {
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
-                    }, title: "TRỞ VỀ ĐĂNG NHẬP",
-                    preIconUrl: AppAssets.ic_arow_left,)
+                  onTap: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginPage()));
+                  },
+                  content: "TRỞ VỀ ĐĂNG NHẬP",
+                  preIconUrl: AppAssets.ic_arow_left,
+                )
               ]),
         ),
       ),
     );
   }
 }
-

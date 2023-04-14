@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../ulti/style/app_assets.dart';
 import '../../../../ulti/style/app_style.dart';
-import '../../../components/image_button.dart';
+import '../../../components/image/image_button.dart';
 
 class SocialNetworking extends StatelessWidget {
   const SocialNetworking({

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:ui_intern/presentation/components/button_widget.dart';
-import 'package:ui_intern/presentation/components/image_logo.dart';
 import 'package:ui_intern/presentation/pages/Login/components/social_networking.dart';
 
 import '../../../ulti/style/app_assets.dart';
 import '../../../ulti/style/app_colors.dart';
 import '../../../ulti/style/app_style.dart';
-import '../../components/base_textform.dart';
+import '../../components/button/button_widget.dart';
+import '../../components/image/image_logo.dart';
+import '../../components/textfield/textfield_widget.dart';
 import '../Login/login_page.dart';
 
 class ResetPasswordPage extends StatefulWidget {
@@ -17,7 +17,6 @@ class ResetPasswordPage extends StatefulWidget {
 }
 
 class _ResetPasswordPageState extends State<ResetPasswordPage> {
-  final bool _isCorretPassword = true;
 
   bool _passwordVisible = false;
   bool _passwordconfirmVisible = false;
@@ -51,46 +50,62 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 const SizedBox(
                   height: 32,
                 ),
-                BaseTextForm(
-                  controller: passwordController,
-                  passwordVisible: _passwordVisible,
-                  isCorretValid: _isCorretPassword,
+                TextfieldWidget.common(
+                  textEditingController: passwordController,
+                  isObscured: _passwordVisible,
                   errorText: 'Mật khẩu phải ít nhất 8 kí tự',
-                  onPressed: () {
+                  suffixIconPath: AppAssets.ic_eye_close_line,
+                  onSuffixIconTap: () {
                     setState(() {
                       _passwordVisible = !_passwordVisible;
                     });
                   },
                   hintText: 'Nhập mật khẩu mới',
                   title: "Mật khẩu mới",
+                  required: true,
+                  disableBackgroundColor: AppColors.gray,
+                  disableTextColor: AppColors.black,
+                  hintStyle: AppStyles.body1.copyWith(color: AppColors.gray),
+                  onChanged: (value) {},
+                  textStyle: AppStyles.body1,
+                  titleStyle: AppStyles.label,
                 ),
-                BaseTextForm(
-                  controller: confirmpasswordController,
-                  passwordVisible: _passwordconfirmVisible,
-                  isCorretValid: _isCorretPassword,
+                TextfieldWidget.common(
+                  textEditingController: passwordController,
+                  isObscured: _passwordconfirmVisible,
                   errorText: 'Mật khẩu phải ít nhất 8 kí tự',
-                  onPressed: () {
+                  suffixIconPath: AppAssets.ic_eye_close_line,
+                  onSuffixIconTap: () {
                     setState(() {
                       _passwordconfirmVisible = !_passwordconfirmVisible;
                     });
                   },
                   hintText: 'Nhập lại mật khẩu mới',
-                  title: 'Xác thực mật khẩu',
+                  title: "Mật khẩu mới",
+                  required: true,
+                  disableBackgroundColor: AppColors.gray,
+                  disableTextColor: AppColors.black,
+                  hintStyle: AppStyles.body1.copyWith(color: AppColors.gray),
+                  onChanged: (value) {},
+                  textStyle: AppStyles.body1,
+                  titleStyle: AppStyles.label,
                 ),
-                const SizedBox(height: 32,),
+                const SizedBox(
+                  height: 32,
+                ),
                 ButtonWidget.primary(
-                  onPressed: () {},
-                  title: "ĐỔI MẬT KHẨU",
+                  onTap: () {},
+                  content: "ĐỔI MẬT KHẨU",
                 ),
                 const SocialNetworking()
               ],
             ),
             ButtonWidget.text(
-              onPressed: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => const LoginPage()));
+              onTap: () {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()));
               },
-              title: "TRỞ VỀ ĐĂNG NHẬP",
+              content: "TRỞ VỀ ĐĂNG NHẬP",
               preIconUrl: AppAssets.ic_arow_left,
             )
           ],

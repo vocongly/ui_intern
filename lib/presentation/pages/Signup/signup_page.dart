@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:ui_intern/presentation/components/button_widget.dart';
-import 'package:ui_intern/presentation/components/image_logo.dart';
 import 'package:ui_intern/presentation/pages/Login/login_page.dart';
 
+import '../../../ulti/style/app_assets.dart';
 import '../../../ulti/style/app_colors.dart';
 import '../../../ulti/style/app_style.dart';
-import '../../components/base_textform.dart';
+import '../../components/button/button_widget.dart';
+import '../../components/image/image_logo.dart';
+import '../../components/textfield/textfield_widget.dart';
 import '../Login/components/social_networking.dart';
 
 class SignupPage extends StatefulWidget {
@@ -19,8 +20,6 @@ class _SignupPageState extends State<SignupPage> {
   bool _passwordVisible = false;
   bool _passwordconfirmVisible = false;
 
-  final bool _isCorretEmail = true;
-  final bool _isCorretPassword = true;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -48,46 +47,66 @@ class _SignupPageState extends State<SignupPage> {
                   const SizedBox(
                     height: 32,
                   ),
-                  BaseTextForm(
-                    controller: emailController,
-                    isCorretValid: _isCorretEmail,
-                    errorText: 'Error text',
-                    hintText: 'Nhập email của bạn',
-                    title: 'Email',
-                  ),
-                  BaseTextForm(
-                    controller: passwordController,
-                    passwordVisible: _passwordVisible,
-                    isCorretValid: _isCorretPassword,
-                    errorText: 'Mật khẩu phải ít nhất 8 kí tự',
-                    onPressed: () {
+                  TextfieldWidget.common(
+                      onChanged: (value) {},
+                      textEditingController: emailController,
+                      title: 'Email',
+                      required: true,
+                      prefixIconPath: AppAssets.ic_email,
+                      hintText: "Nhập email của bạn",
+                      textStyle: AppStyles.body1,
+                      hintStyle: AppStyles.body1.copyWith(color: AppColors.tertiary),
+                      titleStyle: AppStyles.label,
+                      disableTextColor: Colors.black,
+                      disableBackgroundColor: Colors.grey),
+                  TextfieldWidget.common(
+                    textEditingController: passwordController,
+                    isObscured: _passwordVisible,
+                    suffixIconPath: AppAssets.ic_eye_close_line,
+                    prefixIconPath: AppAssets.ic_password,
+                    iconColor: AppColors.tertiary,
+                    onSuffixIconTap: () {
                       setState(() {
                         _passwordVisible = !_passwordVisible;
                       });
                     },
-                    hintText: 'Nhập mật khẩu',
-                    title: "Mật khẩu",
+                    hintText: 'Nhập mật khẩu mới',
+                    title: "Mật khẩu mới",
+                    required: true,
+                    disableBackgroundColor: AppColors.gray,
+                    disableTextColor: AppColors.black,
+                    hintStyle: AppStyles.body1.copyWith(color: AppColors.tertiary),
+                    onChanged: (value) {},
+                    textStyle: AppStyles.body1,
+                    titleStyle: AppStyles.label,
                   ),
-                  BaseTextForm(
-                    controller: confirmpasswordController,
-                    isCorretValid: _isCorretPassword,
-                    errorText: 'Mật khẩu phải ít nhất 8 kí tự',
-                    passwordVisible: _passwordconfirmVisible,
-                    onPressed: () {
+                  TextfieldWidget.common(
+                    textEditingController: confirmpasswordController,
+                    isObscured: _passwordconfirmVisible,
+                    suffixIconPath: AppAssets.ic_eye_close_line,
+                    prefixIconPath: AppAssets.ic_password,
+                    iconColor: AppColors.tertiary,
+                    onSuffixIconTap: () {
                       setState(() {
                         _passwordconfirmVisible = !_passwordconfirmVisible;
                       });
                     },
-                    hintText: 'Nhập lại mật khẩu',
-                    title: 'Xác thực mật khẩu',
+                    hintText: 'Nhập lại mật khẩu mới',
+                    title: "Mật khẩu mới",
+                    required: true,
+                    disableBackgroundColor: AppColors.gray,
+                    disableTextColor: AppColors.black,
+                    hintStyle: AppStyles.body1.copyWith(color: AppColors.tertiary),
+                    onChanged: (value) {},
+                    textStyle: AppStyles.body1,
+                    titleStyle: AppStyles.label,
                   ),
                   const SizedBox(
                     height: 32,
                   ),
                   ButtonWidget.primary(
-                    onPressed: () {},
-                    title: 'ĐĂNG KÝ',
-                    
+                    onTap: () {},
+                    content: 'ĐĂNG KÝ',
                   ),
                   const SocialNetworking(),
                 ],
@@ -100,13 +119,13 @@ class _SignupPageState extends State<SignupPage> {
                       style: AppStyles.body1,
                     ),
                     ButtonWidget.text(
-                      onPressed: () {
+                      onTap: () {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const LoginPage()));
                       },
-                      title: 'ĐĂNG NHẬP NGAY',
+                      content: 'ĐĂNG NHẬP NGAY',
                     )
                   ],
                 ),

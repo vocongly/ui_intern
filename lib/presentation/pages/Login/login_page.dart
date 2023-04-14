@@ -1,13 +1,17 @@
+// ignore_for_file: unused_field
+
 import 'package:flutter/material.dart';
-import 'package:ui_intern/presentation/components/button_widget.dart';
-import 'package:ui_intern/presentation/pages/ForgotPassword/forgotpassword_page.dart';
+import 'package:get_it/get_it.dart';
+import 'package:ui_intern/presentation/bloc/authentication/login/login_cubit.dart';
 import 'package:ui_intern/presentation/pages/Signup/signup_page.dart';
 
+import '../../../ulti/style/app_assets.dart';
 import '../../../ulti/style/app_colors.dart';
 import '../../../ulti/style/app_style.dart';
-import '../../components/base_textform.dart';
-import '../../components/image_logo.dart';
-import 'components/forgot_password.dart';
+import '../../bloc/authentication/authentication_cubit.dart';
+import '../../components/button/button_widget.dart';
+import '../../components/image/image_logo.dart';
+import '../../components/textfield/textfield_widget.dart';
 import 'components/social_networking.dart';
 
 class LoginPage extends StatefulWidget {
@@ -18,34 +22,53 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginpageState extends State<LoginPage> {
-  bool _passwordVisible = false;
+  late bool _passwordVisible;
 
-  bool _isCorretEmail = true;
-  bool _isCorretPassword = true;
+  late Stream loginCubitStream;
 
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  String? _emailErrorText;
+  String? _passwordErrorText;
+  String? _loginErrorText;
 
   @override
   void initState() {
     _passwordVisible = false;
+    _emailController.text = "customer1@tma.com.vn";
+    _passwordController.text = "12345678x@X";
+    loginCubitStream = GetIt.instance.get<LoginCubit>().stream;
+    loginCubitStream.listen((event) {
+      setState(() {
+        _emailErrorText = null;
+        _passwordErrorText = null;
+      });
+      if (!mounted) return;
+      if (event is DisconnectState) {
+        setState(() => _loginErrorText =
+            "Không kết nối được với server. Vui lòng thử lại !!");
+        return;
+      }
+      if (event is ErrorState) {
+        setState(() =>
+            _loginErrorText = "Có lỗi khi tải dữ liệu. Vui lòng thử lại !!");
+        return;
+      }
+      if (event is WrongLoginInfoState) {
+        setState(() => _loginErrorText = "Có lỗi với email hoặc password !!");
+        return;
+      }
+      if (event is InvaildUsernameState) {
+        setState(() => _emailErrorText = "${event.content}!");
+        return;
+      }
+      if (event is InvaildPasswordState) {
+        setState(() => _passwordErrorText = "${event.content}!");
+        return;
+      }
+    });
     super.initState();
-  }
-
-  bool isEmail(String em) {
-    String p =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-
-    RegExp regExp = RegExp(p);
-
-    return regExp.hasMatch(em);
-  }
-
-  bool isPassword(String em) {
-    if (em.length < 8) {
-      return false;
-    }
-    return true;
   }
 
   @override
@@ -70,65 +93,63 @@ class _LoginpageState extends State<LoginPage> {
                   const SizedBox(
                     height: 32,
                   ),
-                  BaseTextForm(
-                    controller: emailController,
-                    isCorretValid: _isCorretEmail,
-                    errorText: 'Error text',
-                    title: 'Email',
-                    hintText: 'Nhập email của bạn', 
+                  TextfieldWidget.common(
+                      onChanged: (value) {},
+                      textEditingController: _emailController,
+                      title: 'Email',
+                      required: true,
+                      prefixIconPath: AppAssets.ic_email,
+                      hintText: "Nhập email của bạn",
+                      textStyle: AppStyles.body1,
+                      iconColor: AppColors.black,
+                      hintStyle:
+                          AppStyles.body1.copyWith(color: AppColors.tertiary),
+                      titleStyle:
+                          AppStyles.label.copyWith(fontWeight: FontWeight.bold),
+                      disableTextColor: Colors.black,
+                      disableBackgroundColor: Colors.grey),
+                  const SizedBox(
+                    height: 16,
                   ),
-                  BaseTextForm(
-                    controller: passwordController,
-                    title: 'Mật khẩu',
-                    isCorretValid: _isCorretPassword,
-                    errorText: 'Mật khẩu phải ít nhất 8 kí tự',
-                    hintText: 'Mật khẩu chứa 8 kí tự',
-                    passwordVisible: _passwordVisible,
-                    onPressed: () {
-                      setState(() {
-                        _passwordVisible = !_passwordVisible;
-                      });
-                    },
-                  ),
-                  ForgotPassword(
-                    onPressed: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const ForgotPasswordPage()));
-                    },
-                  ),
+                  TextfieldWidget.common(
+                      onChanged: (value) {},
+                      textEditingController: _passwordController,
+                      title: 'Mật khẩu',
+                      required: true,
+                      isObscured: !_passwordVisible,
+                      prefixIconPath: AppAssets.ic_password,
+                      suffixIconPath: _passwordVisible
+                          ? AppAssets.ic_eye_line
+                          : AppAssets.ic_eye_close_line,
+                      onSuffixIconTap: () {
+                        setState(() {
+                          _passwordVisible = !_passwordVisible;
+                        });
+                      },
+                      hintText: "Nhập mật khẩu của bạn",
+                      textStyle: AppStyles.body1,
+                      iconColor: AppColors.black,
+                      hintStyle:
+                          AppStyles.body1.copyWith(color: AppColors.tertiary),
+                      titleStyle:
+                          AppStyles.label.copyWith(fontWeight: FontWeight.bold),
+                      disableTextColor: Colors.black,
+                      disableBackgroundColor: Colors.grey),
+                  Align(
+                      alignment: Alignment.centerRight,
+                      child: ButtonWidget.text(
+                          onTap: () {},
+                          content: 'QUÊN MẬT KHẨU?',
+                          textStyle: AppStyles.button)),
                   const SizedBox(
                     height: 32,
                   ),
                   ButtonWidget.primary(
-                    onPressed: () {
-                      if (!isEmail(emailController.text)) {
-                        setState(
-                          () {
-                            _isCorretEmail = false;
-                          },
-                        );
-                      } else {
-                        setState(() {
-                          _isCorretEmail = true;
-                        });
-                      }
-
-                      if (!isPassword(passwordController.text)) {
-                        setState(
-                          () {
-                            _isCorretPassword = false;
-                          },
-                        );
-                      } else {
-                        setState(() {
-                          _isCorretPassword = true;
-                        });
-                      }
+                    onTap: () {
+                      login();
                     },
-                    title: 'ĐĂNG NHẬP',
+                    content: 'ĐĂNG NHẬP',
+                    borderRadius: 8,
                   ),
                   const SocialNetworking(),
                 ],
@@ -141,13 +162,13 @@ class _LoginpageState extends State<LoginPage> {
                       style: AppStyles.body1,
                     ),
                     ButtonWidget.text(
-                      onPressed: () {
+                      onTap: () {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const SignupPage()));
                       },
-                      title: 'ĐĂNG KÝ NGAY',
+                      content: 'ĐĂNG KÝ NGAY',
                     )
                   ],
                 ),
@@ -157,5 +178,13 @@ class _LoginpageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  Future<void> login() async {
+    GetIt.instance.get<AuthenticationCubit>().login(
+        context: context,
+        username: _emailController.text,
+        password: _passwordController.text,
+        state: this);
   }
 }
