@@ -22,7 +22,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginpageState extends State<LoginPage> {
-  late bool _passwordVisible;
+  bool _isHidePassword = true;
 
   late Stream loginCubitStream;
 
@@ -35,7 +35,6 @@ class _LoginpageState extends State<LoginPage> {
 
   @override
   void initState() {
-    _passwordVisible = false;
     _emailController.text = "customer1@tma.com.vn";
     _passwordController.text = "12345678x@X";
     loginCubitStream = GetIt.instance.get<LoginCubit>().stream;
@@ -94,13 +93,16 @@ class _LoginpageState extends State<LoginPage> {
                     height: 32,
                   ),
                   TextfieldWidget.common(
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        clearError();
+                      },
                       textEditingController: _emailController,
                       title: 'Email',
                       required: true,
                       prefixIconPath: AppAssets.ic_email,
                       hintText: "Nhập email của bạn",
                       textStyle: AppStyles.body1,
+                      errorText: _emailErrorText,
                       iconColor: AppColors.black,
                       hintStyle:
                           AppStyles.body1.copyWith(color: AppColors.tertiary),
@@ -112,19 +114,20 @@ class _LoginpageState extends State<LoginPage> {
                     height: 16,
                   ),
                   TextfieldWidget.common(
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        clearError();
+                      },
                       textEditingController: _passwordController,
                       title: 'Mật khẩu',
                       required: true,
-                      isObscured: !_passwordVisible,
+                      errorText: _passwordErrorText,
+                      isObscured: _isHidePassword,
                       prefixIconPath: AppAssets.ic_password,
-                      suffixIconPath: _passwordVisible
+                      suffixIconPath: !_isHidePassword
                           ? AppAssets.ic_eye_line
                           : AppAssets.ic_eye_close_line,
                       onSuffixIconTap: () {
-                        setState(() {
-                          _passwordVisible = !_passwordVisible;
-                        });
+                        updateHidePasswordState();
                       },
                       hintText: "Nhập mật khẩu của bạn",
                       textStyle: AppStyles.body1,
@@ -135,6 +138,12 @@ class _LoginpageState extends State<LoginPage> {
                           AppStyles.label.copyWith(fontWeight: FontWeight.bold),
                       disableTextColor: Colors.black,
                       disableBackgroundColor: Colors.grey),
+                  if (_loginErrorText != null)
+                    Padding(
+                        padding: const EdgeInsets.only(top: 12.0),
+                        child: Text(_loginErrorText!,
+                            style:
+                                AppStyles.body2.copyWith(color: Colors.red))),
                   Align(
                       alignment: Alignment.centerRight,
                       child: ButtonWidget.text(
@@ -181,10 +190,36 @@ class _LoginpageState extends State<LoginPage> {
   }
 
   Future<void> login() async {
+    unFocus();
+    resetHidePasswordState();
     GetIt.instance.get<AuthenticationCubit>().login(
         context: context,
         username: _emailController.text,
         password: _passwordController.text,
         state: this);
+  }
+
+  void clearError() async {
+    setState(() {
+      _emailErrorText = null;
+      _passwordErrorText = null;
+      _loginErrorText = null;
+    });
+  }
+
+  void resetHidePasswordState() {
+    setState(() {
+      _isHidePassword = true;
+    });
+  }
+
+  void updateHidePasswordState() {
+    setState(() {
+      _isHidePassword = !_isHidePassword;
+    });
+  }
+
+  void unFocus() {
+    FocusScope.of(context).unfocus();
   }
 }
